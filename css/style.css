@@ -8,10 +8,24 @@ body
  
   
 }
+#score_box
+{
+   
+    border: 2px solid black;
+    margin-left: 5%;
+    padding: 4%;
+}
+#high_score
+{
+   
+    border: 2px solid black;
+    margin-right: 5%;
+    padding: 4%;
+}
 .game{
     background-color: aliceblue;
-    min-height: 100vh;
-    background-size:100vw 100vh;
+    min-height: 80vh;
+    background-size:80vw 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,22 +35,29 @@ body
   background-color: black;
   width: 100vmin;
   height: 80vmin;
-  border: 2px solid brown;
+  border-top: 10px solid brown;
+  border-bottom: 10px solid brown;
+
   display: grid;
   grid-template-rows: repeat(20, 1fr);
   grid-template-columns: repeat(20, 1fr);
 }
+
 .snake
 {
 background-color: white;
+border-radius: 100%;
 }
 .head
 {
-    background-color:white;
+    background-color:yellow;
+    border-radius: 100%;
+ 
 }
 .food
 {
     background-color: red;
+    border-radius: 100%;
 }
 #pause
 {

@@ -1,12 +1,15 @@
 let inputDir = {x: 0, y: 0};
 let snakeArr = [{x:10,y:17}];
 let lastPaintTime = 0;
-let speed =20;
+let speed =15;
+let score = 0;
 let food = {x:10,y:5}
+let hscore = 0;
 function main(ctime)
 {
     window.requestAnimationFrame(main);
   //  console.log(ctime);
+  
   if((ctime-lastPaintTime)/1000 <= 1/speed)
     {
         return;
@@ -24,7 +27,11 @@ function collision(snake)
         if(snake[i].x === snake[0].x && snake[i].y === snake[0].y){
             return true;
         }
-    }    
+    } 
+    if(snake[0].y>20||snake[0].y<0)
+    {
+        return true;
+    }   
 }
 function overlap(snake)
 {
@@ -44,6 +51,8 @@ function gameEngine()
         inputDir={x:0,y:0};
         alert("Game over");
         snakeArr = [{x: 13, y: 15}];
+        score = 0;
+        speed = 15;
     }
  //move head
 
@@ -57,7 +66,7 @@ function gameEngine()
     {
         snakeArr[0].x = 0;
     }
-else if (snakeArr[0].y>20)
+else if (snakeArr[0].y>21)
     {
         snakeArr[0].y = 0;
     }
@@ -65,19 +74,28 @@ else if (snakeArr[0].x<0)
     {
         snakeArr[0].x = 20;
     }
-else if (snakeArr[0].y<0)
+else if (snakeArr[0].y<-1)
     {
         snakeArr[0].y = 20;
     }
     //eat
     if(snakeArr[0].y === food.y && snakeArr[0].x ===food.x)
     {
-        console.log(snakeArr.length);
+        score+=1;
+       // score_box.innerHTML = "Score: " +score;
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
-        food.x=(Math.round(1+18*Math.random()));
-        food.y=(Math.round(1+18*Math.random()));
+        food.x=(Math.round(2+16*Math.random()));
+        food.y=(Math.round(2+16*Math.random()));
+        speed += 1;
+        //console.log(score);
+    }
+    if(hscore<score)
+    {
+        hscore = score;
     }
     //display
+    score_box.innerHTML = "Score: " +score;
+    high_score.innerHTML = "HighScore: " +hscore;
     board.innerHTML = "";
     snakeArr.forEach((e, index)=>{
         snakeElement = document.createElement('div');
